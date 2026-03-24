@@ -1,0 +1,131 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 520" font-family="Consolas, monospace" font-size="13">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 6" refX="10" refY="3" markerWidth="10" markerHeight="6" orient="auto">
+      <path d="M0,0 L10,3 L0,6 Z" fill="#555"/>
+    </marker>
+    <marker id="arrow-red" viewBox="0 0 10 6" refX="10" refY="3" markerWidth="10" markerHeight="6" orient="auto">
+      <path d="M0,0 L10,3 L0,6 Z" fill="#c0392b"/>
+    </marker>
+    <marker id="arrow-blue" viewBox="0 0 10 6" refX="10" refY="3" markerWidth="10" markerHeight="6" orient="auto">
+      <path d="M0,0 L10,3 L0,6 Z" fill="#2980b9"/>
+    </marker>
+    <marker id="arrow-green" viewBox="0 0 10 6" refX="10" refY="3" markerWidth="10" markerHeight="6" orient="auto">
+      <path d="M0,0 L10,3 L0,6 Z" fill="#27ae60"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect width="900" height="520" rx="8" fill="#1a1a2e"/>
+
+  <!-- Title -->
+  <text x="450" y="35" text-anchor="middle" fill="#e0e0e0" font-size="18" font-weight="bold">Spectrum Plus — System Overview</text>
+  <text x="450" y="55" text-anchor="middle" fill="#888" font-size="11">Waveshare ESP32-P4 Module Dev Kit (SKU:30560) + 2× HUB75 128×64 Panels</text>
+
+  <!-- ESP32-P4 Board -->
+  <rect x="30" y="90" width="260" height="340" rx="10" fill="#16213e" stroke="#4a90d9" stroke-width="2"/>
+  <text x="160" y="115" text-anchor="middle" fill="#4a90d9" font-size="15" font-weight="bold">ESP32-P4 Dev Kit</text>
+  <text x="160" y="133" text-anchor="middle" fill="#6a9fd9" font-size="10">Waveshare SKU:30560</text>
+
+  <!-- CPU block -->
+  <rect x="55" y="148" width="210" height="45" rx="5" fill="#1a3a5c" stroke="#4a90d9" stroke-width="1"/>
+  <text x="160" y="168" text-anchor="middle" fill="#7ab8f5" font-size="11" font-weight="bold">ESP32-P4 RISC-V Dual Core</text>
+  <text x="160" y="184" text-anchor="middle" fill="#5a98d5" font-size="10">400 MHz • PSRAM</text>
+
+  <!-- Onboard Mic block -->
+  <rect x="55" y="205" width="100" height="55" rx="5" fill="#2d1a3e" stroke="#9b59b6" stroke-width="1"/>
+  <text x="105" y="225" text-anchor="middle" fill="#c39bd3" font-size="10" font-weight="bold">MEMS Mic</text>
+  <text x="105" y="240" text-anchor="middle" fill="#a569bd" font-size="9">(onboard)</text>
+  <text x="105" y="253" text-anchor="middle" fill="#a569bd" font-size="9">SMD</text>
+
+  <!-- ES8311 Codec block -->
+  <rect x="165" y="205" width="100" height="55" rx="5" fill="#2d1a3e" stroke="#9b59b6" stroke-width="1"/>
+  <text x="215" y="225" text-anchor="middle" fill="#c39bd3" font-size="10" font-weight="bold">ES8311</text>
+  <text x="215" y="240" text-anchor="middle" fill="#a569bd" font-size="9">Audio Codec</text>
+  <text x="215" y="253" text-anchor="middle" fill="#a569bd" font-size="9">I2C addr 0x18</text>
+
+  <!-- Mic to Codec arrow -->
+  <line x1="155" y1="232" x2="163" y2="232" stroke="#9b59b6" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Audio flow labels inside board -->
+  <rect x="55" y="270" width="210" height="42" rx="4" fill="#1a2a1a" stroke="#27ae60" stroke-width="1"/>
+  <text x="160" y="287" text-anchor="middle" fill="#6dca88" font-size="10" font-weight="bold">I2S Bus (onboard)</text>
+  <text x="160" y="302" text-anchor="middle" fill="#4da86a" font-size="9">MCLK=13  SCLK=12  LRCK=10  DIN=9</text>
+
+  <!-- I2C label -->
+  <rect x="55" y="320" width="210" height="30" rx="4" fill="#2a2a1a" stroke="#f39c12" stroke-width="1"/>
+  <text x="160" y="340" text-anchor="middle" fill="#f5b041" font-size="10">I2C: SDA=7  SCL=8</text>
+
+  <!-- HUB75 GPIO block -->
+  <rect x="55" y="358" width="210" height="55" rx="4" fill="#1a1a2a" stroke="#e74c3c" stroke-width="1"/>
+  <text x="160" y="376" text-anchor="middle" fill="#ec7063" font-size="10" font-weight="bold">HUB75 GPIOs</text>
+  <text x="160" y="391" text-anchor="middle" fill="#d35400" font-size="9">RGB: 1-6 • Addr: 14-18</text>
+  <text x="160" y="404" text-anchor="middle" fill="#d35400" font-size="9">CLK=19  LAT=20  OE=21</text>
+
+  <!-- Panel 1 -->
+  <rect x="370" y="130" width="230" height="160" rx="8" fill="#1a2e1a" stroke="#27ae60" stroke-width="2"/>
+  <text x="485" y="158" text-anchor="middle" fill="#27ae60" font-size="14" font-weight="bold">HUB75 Panel 1</text>
+  <text x="485" y="176" text-anchor="middle" fill="#4da86a" font-size="11">128 × 64 • FM6126A</text>
+
+  <!-- Panel 1 IN/OUT labels -->
+  <rect x="385" y="200" width="50" height="22" rx="3" fill="#27ae60"/>
+  <text x="410" y="215" text-anchor="middle" fill="#fff" font-size="10" font-weight="bold">IN</text>
+  <rect x="535" y="200" width="50" height="22" rx="3" fill="#e67e22"/>
+  <text x="560" y="215" text-anchor="middle" fill="#fff" font-size="10" font-weight="bold">OUT</text>
+
+  <text x="485" y="250" text-anchor="middle" fill="#4da86a" font-size="10">Bars 1–64 (left half)</text>
+  <text x="485" y="268" text-anchor="middle" fill="#3a8a4a" font-size="9">← Low frequencies</text>
+
+  <!-- Panel 2 -->
+  <rect x="370" y="330" width="230" height="160" rx="8" fill="#1a2e1a" stroke="#27ae60" stroke-width="2"/>
+  <text x="485" y="358" text-anchor="middle" fill="#27ae60" font-size="14" font-weight="bold">HUB75 Panel 2</text>
+  <text x="485" y="376" text-anchor="middle" fill="#4da86a" font-size="11">128 × 64 • FM6126A</text>
+
+  <!-- Panel 2 IN/OUT labels -->
+  <rect x="385" y="400" width="50" height="22" rx="3" fill="#27ae60"/>
+  <text x="410" y="415" text-anchor="middle" fill="#fff" font-size="10" font-weight="bold">IN</text>
+  <rect x="535" y="400" width="50" height="22" rx="3" fill="#666"/>
+  <text x="560" y="415" text-anchor="middle" fill="#ccc" font-size="10">OUT</text>
+
+  <text x="485" y="450" text-anchor="middle" fill="#4da86a" font-size="10">Bars 65–128 (right half)</text>
+  <text x="485" y="468" text-anchor="middle" fill="#3a8a4a" font-size="9">High frequencies →</text>
+
+  <!-- ESP32 → Panel 1 (HUB75 data) -->
+  <line x1="290" y1="385" x2="370" y2="211" stroke="#e74c3c" stroke-width="2" marker-end="url(#arrow-red)"/>
+  <text x="315" y="280" fill="#ec7063" font-size="10" transform="rotate(-35, 315, 280)">14 GPIO wires</text>
+
+  <!-- Panel 1 OUT → Panel 2 IN (ribbon cable) -->
+  <line x1="560" y1="224" x2="560" y2="370" stroke="#e67e22" stroke-width="2.5" stroke-dasharray="6,3"/>
+  <line x1="560" y1="370" x2="435" y2="398" stroke="#e67e22" stroke-width="2.5" marker-end="url(#arrow)"/>
+  <text x="580" y="305" fill="#e67e22" font-size="10" font-weight="bold">16-pin</text>
+  <text x="580" y="320" fill="#e67e22" font-size="10">ribbon</text>
+
+  <!-- Power Supply -->
+  <rect x="680" y="200" width="190" height="120" rx="8" fill="#2a1a1a" stroke="#c0392b" stroke-width="2"/>
+  <text x="775" y="228" text-anchor="middle" fill="#c0392b" font-size="14" font-weight="bold">5V Power Supply</text>
+  <text x="775" y="248" text-anchor="middle" fill="#e67e73" font-size="11">8A+ recommended</text>
+  <text x="775" y="275" text-anchor="middle" fill="#a93226" font-size="10">5V + GND → Panel 1</text>
+  <text x="775" y="292" text-anchor="middle" fill="#a93226" font-size="10">5V + GND → Panel 2</text>
+  <text x="775" y="309" text-anchor="middle" fill="#a93226" font-size="10">Common GND → ESP32</text>
+
+  <!-- Power lines -->
+  <line x1="680" y1="260" x2="600" y2="210" stroke="#c0392b" stroke-width="1.5" marker-end="url(#arrow-red)" stroke-dasharray="4,2"/>
+  <line x1="680" y1="280" x2="600" y2="410" stroke="#c0392b" stroke-width="1.5" marker-end="url(#arrow-red)" stroke-dasharray="4,2"/>
+
+  <!-- USB-C label -->
+  <rect x="80" y="435" width="120" height="28" rx="5" fill="#333" stroke="#888" stroke-width="1"/>
+  <text x="140" y="454" text-anchor="middle" fill="#ccc" font-size="10" font-weight="bold">USB-C (flash)</text>
+
+  <!-- Legend -->
+  <rect x="660" y="370" width="220" height="120" rx="6" fill="#111" stroke="#444" stroke-width="1"/>
+  <text x="770" y="392" text-anchor="middle" fill="#aaa" font-size="11" font-weight="bold">Legend</text>
+  <line x1="675" y1="405" x2="710" y2="405" stroke="#e74c3c" stroke-width="2"/>
+  <text x="720" y="409" fill="#e74c3c" font-size="10">HUB75 data (14 wires)</text>
+  <line x1="675" y1="425" x2="710" y2="425" stroke="#e67e22" stroke-width="2" stroke-dasharray="6,3"/>
+  <text x="720" y="429" fill="#e67e22" font-size="10">Ribbon cable (daisy-chain)</text>
+  <line x1="675" y1="445" x2="710" y2="445" stroke="#c0392b" stroke-width="1.5" stroke-dasharray="4,2"/>
+  <text x="720" y="449" fill="#c0392b" font-size="10">5V power</text>
+  <line x1="675" y1="465" x2="710" y2="465" stroke="#9b59b6" stroke-width="2"/>
+  <text x="720" y="469" fill="#9b59b6" font-size="10">Audio (onboard)</text>
+  <line x1="675" y1="485" x2="710" y2="485" stroke="#f39c12" stroke-width="2"/>
+  <text x="720" y="489" fill="#f39c12" font-size="10">I2C codec control</text>
+</svg>

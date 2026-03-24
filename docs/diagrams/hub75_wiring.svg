@@ -1,0 +1,124 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 580" font-family="Consolas, monospace" font-size="12">
+  <!-- Background -->
+  <rect width="820" height="580" rx="8" fill="#1a1a2e"/>
+
+  <!-- Title -->
+  <text x="410" y="32" text-anchor="middle" fill="#e0e0e0" font-size="17" font-weight="bold">HUB75 Wiring — ESP32-P4 to Panel 1 Input</text>
+  <text x="410" y="52" text-anchor="middle" fill="#888" font-size="10">Panel 2 connects via ribbon cable from Panel 1 output — no extra wiring needed</text>
+
+  <!-- ESP32-P4 GPIO Header -->
+  <rect x="30" y="80" width="200" height="470" rx="8" fill="#16213e" stroke="#4a90d9" stroke-width="2"/>
+  <text x="130" y="105" text-anchor="middle" fill="#4a90d9" font-size="14" font-weight="bold">ESP32-P4 GPIOs</text>
+
+  <!-- HUB75 Connector -->
+  <rect x="550" y="80" width="240" height="470" rx="8" fill="#1a2e1a" stroke="#27ae60" stroke-width="2"/>
+  <text x="670" y="105" text-anchor="middle" fill="#27ae60" font-size="14" font-weight="bold">HUB75 16-Pin Header</text>
+  <text x="670" y="120" text-anchor="middle" fill="#4da86a" font-size="10">(Panel 1 INPUT connector)</text>
+
+  <!-- RGB DATA section label -->
+  <text x="130" y="138" text-anchor="middle" fill="#e74c3c" font-size="11" font-weight="bold">── RGB Data ──</text>
+
+  <!-- R1: GPIO 1 -->
+  <rect x="50" y="150" width="160" height="26" rx="4" fill="#3a1a1a" stroke="#e74c3c" stroke-width="1"/>
+  <text x="130" y="168" text-anchor="middle" fill="#e74c3c" font-size="12" font-weight="bold">GPIO 1  →  R1</text>
+  <rect x="570" y="150" width="200" height="26" rx="4" fill="#3a1a1a" stroke="#e74c3c" stroke-width="1"/>
+  <text x="670" y="168" text-anchor="middle" fill="#e74c3c" font-size="12">Pin 1: R1 (Red upper)</text>
+  <line x1="210" y1="163" x2="568" y2="163" stroke="#e74c3c" stroke-width="1.5"/>
+
+  <!-- G1: GPIO 2 -->
+  <rect x="50" y="182" width="160" height="26" rx="4" fill="#1a3a1a" stroke="#27ae60" stroke-width="1"/>
+  <text x="130" y="200" text-anchor="middle" fill="#27ae60" font-size="12" font-weight="bold">GPIO 2  →  G1</text>
+  <rect x="570" y="182" width="200" height="26" rx="4" fill="#1a3a1a" stroke="#27ae60" stroke-width="1"/>
+  <text x="670" y="200" text-anchor="middle" fill="#27ae60" font-size="12">Pin 2: G1 (Grn upper)</text>
+  <line x1="210" y1="195" x2="568" y2="195" stroke="#27ae60" stroke-width="1.5"/>
+
+  <!-- B1: GPIO 3 -->
+  <rect x="50" y="214" width="160" height="26" rx="4" fill="#1a1a3a" stroke="#2980b9" stroke-width="1"/>
+  <text x="130" y="232" text-anchor="middle" fill="#2980b9" font-size="12" font-weight="bold">GPIO 3  →  B1</text>
+  <rect x="570" y="214" width="200" height="26" rx="4" fill="#1a1a3a" stroke="#2980b9" stroke-width="1"/>
+  <text x="670" y="232" text-anchor="middle" fill="#2980b9" font-size="12">Pin 3: B1 (Blu upper)</text>
+  <line x1="210" y1="227" x2="568" y2="227" stroke="#2980b9" stroke-width="1.5"/>
+
+  <!-- R2: GPIO 4 -->
+  <rect x="50" y="246" width="160" height="26" rx="4" fill="#3a1a1a" stroke="#e74c3c" stroke-width="1"/>
+  <text x="130" y="264" text-anchor="middle" fill="#e74c3c" font-size="12" font-weight="bold">GPIO 4  →  R2</text>
+  <rect x="570" y="246" width="200" height="26" rx="4" fill="#3a1a1a" stroke="#e74c3c" stroke-width="1"/>
+  <text x="670" y="264" text-anchor="middle" fill="#e74c3c" font-size="12">Pin 5: R2 (Red lower)</text>
+  <line x1="210" y1="259" x2="568" y2="259" stroke="#e74c3c" stroke-width="1.5"/>
+
+  <!-- G2: GPIO 5 -->
+  <rect x="50" y="278" width="160" height="26" rx="4" fill="#1a3a1a" stroke="#27ae60" stroke-width="1"/>
+  <text x="130" y="296" text-anchor="middle" fill="#27ae60" font-size="12" font-weight="bold">GPIO 5  →  G2</text>
+  <rect x="570" y="278" width="200" height="26" rx="4" fill="#1a3a1a" stroke="#27ae60" stroke-width="1"/>
+  <text x="670" y="296" text-anchor="middle" fill="#27ae60" font-size="12">Pin 6: G2 (Grn lower)</text>
+  <line x1="210" y1="291" x2="568" y2="291" stroke="#27ae60" stroke-width="1.5"/>
+
+  <!-- B2: GPIO 6 -->
+  <rect x="50" y="310" width="160" height="26" rx="4" fill="#1a1a3a" stroke="#2980b9" stroke-width="1"/>
+  <text x="130" y="328" text-anchor="middle" fill="#2980b9" font-size="12" font-weight="bold">GPIO 6  →  B2</text>
+  <rect x="570" y="310" width="200" height="26" rx="4" fill="#1a1a3a" stroke="#2980b9" stroke-width="1"/>
+  <text x="670" y="328" text-anchor="middle" fill="#2980b9" font-size="12">Pin 7: B2 (Blu lower)</text>
+  <line x1="210" y1="323" x2="568" y2="323" stroke="#2980b9" stroke-width="1.5"/>
+
+  <!-- ADDRESS section label -->
+  <text x="130" y="358" text-anchor="middle" fill="#f39c12" font-size="11" font-weight="bold">── Row Address ──</text>
+
+  <!-- A: GPIO 14 -->
+  <rect x="50" y="368" width="160" height="26" rx="4" fill="#2a2a1a" stroke="#f39c12" stroke-width="1"/>
+  <text x="130" y="386" text-anchor="middle" fill="#f39c12" font-size="12" font-weight="bold">GPIO 14  →  A</text>
+  <rect x="570" y="368" width="200" height="26" rx="4" fill="#2a2a1a" stroke="#f39c12" stroke-width="1"/>
+  <text x="670" y="386" text-anchor="middle" fill="#f39c12" font-size="12">Pin 9: A (addr bit 0)</text>
+  <line x1="210" y1="381" x2="568" y2="381" stroke="#f39c12" stroke-width="1.5"/>
+
+  <!-- B: GPIO 15 -->
+  <rect x="50" y="396" width="160" height="26" rx="4" fill="#2a2a1a" stroke="#f39c12" stroke-width="1"/>
+  <text x="130" y="414" text-anchor="middle" fill="#f39c12" font-size="12" font-weight="bold">GPIO 15  →  B</text>
+  <rect x="570" y="396" width="200" height="26" rx="4" fill="#2a2a1a" stroke="#f39c12" stroke-width="1"/>
+  <text x="670" y="414" text-anchor="middle" fill="#f39c12" font-size="12">Pin 10: B (addr bit 1)</text>
+  <line x1="210" y1="409" x2="568" y2="409" stroke="#f39c12" stroke-width="1.5"/>
+
+  <!-- C: GPIO 16 -->
+  <rect x="50" y="424" width="160" height="26" rx="4" fill="#2a2a1a" stroke="#f39c12" stroke-width="1"/>
+  <text x="130" y="442" text-anchor="middle" fill="#f39c12" font-size="12" font-weight="bold">GPIO 16  →  C</text>
+  <rect x="570" y="424" width="200" height="26" rx="4" fill="#2a2a1a" stroke="#f39c12" stroke-width="1"/>
+  <text x="670" y="442" text-anchor="middle" fill="#f39c12" font-size="12">Pin 11: C (addr bit 2)</text>
+  <line x1="210" y1="437" x2="568" y2="437" stroke="#f39c12" stroke-width="1.5"/>
+
+  <!-- D: GPIO 17 -->
+  <rect x="50" y="452" width="160" height="26" rx="4" fill="#2a2a1a" stroke="#f39c12" stroke-width="1"/>
+  <text x="130" y="470" text-anchor="middle" fill="#f39c12" font-size="12" font-weight="bold">GPIO 17  →  D</text>
+  <rect x="570" y="452" width="200" height="26" rx="4" fill="#2a2a1a" stroke="#f39c12" stroke-width="1"/>
+  <text x="670" y="470" text-anchor="middle" fill="#f39c12" font-size="12">Pin 12: D (addr bit 3)</text>
+  <line x1="210" y1="465" x2="568" y2="465" stroke="#f39c12" stroke-width="1.5"/>
+
+  <!-- E: GPIO 18 -->
+  <rect x="50" y="480" width="160" height="26" rx="4" fill="#2a2a1a" stroke="#f39c12" stroke-width="1"/>
+  <text x="130" y="498" text-anchor="middle" fill="#f39c12" font-size="12" font-weight="bold">GPIO 18  →  E</text>
+  <rect x="570" y="480" width="200" height="26" rx="4" fill="#2a2a1a" stroke="#f39c12" stroke-width="1"/>
+  <text x="670" y="498" text-anchor="middle" fill="#f39c12" font-size="12">Pin 8: E (addr bit 4)</text>
+  <line x1="210" y1="493" x2="568" y2="493" stroke="#f39c12" stroke-width="1.5"/>
+
+  <!-- CONTROL section — in the middle area -->
+  <text x="390" y="365" text-anchor="middle" fill="#9b59b6" font-size="11" font-weight="bold">── Control ──</text>
+
+  <!-- CLK -->
+  <rect x="310" y="380" width="160" height="22" rx="4" fill="#2d1a3e" stroke="#9b59b6" stroke-width="1"/>
+  <text x="390" y="396" text-anchor="middle" fill="#c39bd3" font-size="11">GPIO 19 → CLK (pin 13)</text>
+
+  <!-- LAT -->
+  <rect x="310" y="408" width="160" height="22" rx="4" fill="#2d1a3e" stroke="#9b59b6" stroke-width="1"/>
+  <text x="390" y="424" text-anchor="middle" fill="#c39bd3" font-size="11">GPIO 20 → LAT (pin 14)</text>
+
+  <!-- OE -->
+  <rect x="310" y="436" width="160" height="22" rx="4" fill="#2d1a3e" stroke="#9b59b6" stroke-width="1"/>
+  <text x="390" y="452" text-anchor="middle" fill="#c39bd3" font-size="11">GPIO 21 → OE  (pin 15)</text>
+
+  <!-- GND note -->
+  <rect x="310" y="468" width="160" height="22" rx="4" fill="#2a1a1a" stroke="#c0392b" stroke-width="1"/>
+  <text x="390" y="484" text-anchor="middle" fill="#e67e73" font-size="11">GND → GND (pins 4,16)</text>
+
+  <!-- Note -->
+  <text x="410" y="530" text-anchor="middle" fill="#666" font-size="10">HUB75 pin 4 and pin 16 are GND. Pins marked are for a standard 2×8 HUB75 header.</text>
+  <text x="410" y="546" text-anchor="middle" fill="#666" font-size="10">All pin assignments defined in firmware/main/pin_config.h</text>
+  <text x="410" y="562" text-anchor="middle" fill="#555" font-size="9">Spectrum Plus v0.1.0-alpha</text>
+</svg>
