@@ -1,0 +1,24 @@
+# Build artifacts
+firmware/build/
+firmware/managed_components/
+firmware/dependencies.lock
+sdkconfig
+sdkconfig.old
+sdkconfig.ci
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Claude
+.claude/
+
+# Temp
+*.tmp

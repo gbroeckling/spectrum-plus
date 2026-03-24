@@ -1,0 +1,7 @@
+dependencies:
+  espressif/esp-dsp:
+    version: "*"
+  espressif/es8311:
+    version: "*"
+  esp_hub75_rgb_led_matrix:
+    git: https://github.com/mrcodetastic/ESP32-HUB75-MatrixPanel-DMA.git

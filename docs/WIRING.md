@@ -1,38 +1,64 @@
-# Wiring Reference (Known-good)
+# Wiring Reference — Spectrum Plus
 
-This page is a condensed wiring cheat-sheet.
+Waveshare ESP32-P4 Module Dev Kit (SKU:30560) + 2× HUB75 128×64 panels.
 
-## INMP441 → ESP32-S3
+**All pin assignments live in `firmware/main/pin_config.h`.**
 
-- VDD / 3V3  →  3.3V
-- GND        →  GND
-- SCK / BCLK →  GPIO41
-- WS / LRCLK →  GPIO42
-- SD / DOUT  →  GPIO40
-- L/R        →  GND
+## Audio (onboard — no external wiring)
 
-> The YAML calls: `spectrum::i2s_init_mic(GPIO_NUM_41, GPIO_NUM_42, GPIO_NUM_40);`
+The dev kit has a built-in MEMS microphone routed through an ES8311 codec.
+These pins are fixed on the PCB:
 
-## HUB75 128×64 → ESP32-S3
+| Function | GPIO | Notes |
+|----------|------|-------|
+| I2C SDA  | 7    | ES8311 control |
+| I2C SCL  | 8    | ES8311 control |
+| I2S DIN  | 9    | Audio from codec to ESP32 |
+| I2S LRCK | 10   | Word select |
+| I2S DOUT | 11   | To speaker amp (unused) |
+| I2S SCLK | 12   | Bit clock |
+| I2S MCLK | 13   | Master clock |
+| PA_Ctrl  | 53   | Speaker amp enable (unused) |
 
-From `esphome/spectrum-analyzer.yaml`:
+## HUB75 panels → ESP32-P4
 
-- R1→GPIO4  G1→GPIO5  B1→GPIO6
-- R2→GPIO7  G2→GPIO8  B2→GPIO9
-- A→GPIO10  B→GPIO11  C→GPIO12  D→GPIO13  E→GPIO14
-- CLK→GPIO15  LAT→GPIO16  OE→GPIO17
+Two 128×64 FM6126A panels daisy-chained (OUT of panel 1 → IN of panel 2).
+Only the first panel's input connects to the ESP32-P4:
 
-Panel:
-- `panel_width: 128`
-- `panel_height: 64`
-- `shift_driver: FM6126A`
+| Function | GPIO | Notes |
+|----------|------|-------|
+| R1       | 1    | Upper-half red |
+| G1       | 2    | Upper-half green |
+| B1       | 3    | Upper-half blue |
+| R2       | 4    | Lower-half red |
+| G2       | 5    | Lower-half green |
+| B2       | 6    | Lower-half blue |
+| A        | 14   | Row address bit 0 |
+| B        | 15   | Row address bit 1 |
+| C        | 16   | Row address bit 2 |
+| D        | 17   | Row address bit 3 |
+| E        | 18   | Row address bit 4 |
+| CLK      | 19   | Pixel clock |
+| LAT      | 20   | Latch |
+| OE       | 21   | Output enable |
+
+## GPIOs reserved by other onboard peripherals (do not use)
+
+| Peripheral | GPIOs |
+|------------|-------|
+| Audio codec | 7, 8, 9, 10, 11, 12, 13, 53 |
+| Ethernet RMII | 28, 29, 30, 31, 34, 35, 49, 50, 51, 52 |
+| SD card (SDIO) | 39, 40, 41, 42, 43, 44 |
+| BOOT button | 0 (typically) |
+
+## Panel daisy-chain
+
+Connect the **HUB75 output** ribbon of panel 1 to the **HUB75 input** of panel 2
+using a standard 16-pin ribbon cable. Both panels share the same address/clock/data
+lines — the shift driver clocks data through both panels automatically.
 
 ## Power
 
-- Panel: 5V + GND from a proper supply
-- ESP32: powered over USB (or a stable 5V source)
-- **Common ground required** (panel GND tied to ESP32 GND)
-
-See diagrams:
-- `docs/diagrams/inmp441_wiring.png`
-- `docs/diagrams/hub75_wiring.png`
+- Both panels: 5V + GND from a proper supply (budget ~4A per panel)
+- ESP32-P4: powered over USB-C (or regulated 5V)
+- **Common ground required** — panel GND, ESP32 GND, and PSU GND all tied together

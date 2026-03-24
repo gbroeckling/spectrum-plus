@@ -1,150 +1,133 @@
 # Build Guide (Step-by-step)
 
-This guide is written so anyone can reproduce the build and get a working spectrum analyzer.
-
-> ✅ Credentials note: the repo ships with **no Wi‑Fi/API/OTA passwords**.  
-> You must create `esphome/secrets.yaml` before compiling.
+> **Status: Alpha** — this guide is written for the target hardware but has
+> not been validated end-to-end on a physical build yet.
 
 ---
 
-## What you’re building
+## What you're building
 
-- **ESP32‑S3** reads audio from an **INMP441 I2S mic**
-- Runs a **512-point FFT @ 44.1kHz**
-- Renders **64 bars** onto a **HUB75 128×64** RGB matrix panel
+- **Waveshare ESP32-P4 Module Dev Kit** reads audio from its **onboard MEMS microphone**
+  via the **ES8311 codec**
+- Runs a **1024-point FFT @ 44.1 kHz**
+- Renders **128 bars** onto **two daisy-chained HUB75 128×64 RGB matrix panels** (256×64 total)
 
 ---
 
-## Parts list (core)
+## Parts list
 
 Required:
-- 1× ESP32‑S3 DevKitC‑1 (or compatible ESP32‑S3 board)
-- 1× HUB75 RGB matrix panel (128×64)
-- 1× INMP441 I2S microphone module
-- 1× 5V power supply sized for your panel (see “Power” below)
-- Wiring (Dupont / JST / screw terminals as appropriate)
+- 1× Waveshare ESP32-P4 Module Dev Kit (SKU:30560)
+- 2× HUB75 RGB matrix panel, 128×64, FM6126A shift driver
+- 1× HUB75 16-pin ribbon cable (panel 1 OUT → panel 2 IN)
+- 1× 5 V power supply (budget ~4 A per panel, 8 A+ total)
+- Dupont / JST wires for HUB75 header-to-GPIO connection
 
 Helpful:
-- HUB75 adapter / breakout with screw terminals (cleaner wiring)
-- Standoffs / mounting for the panel + controller
-- Enclosure or frame (optional)
+- HUB75 breakout board with screw terminals (cleaner wiring)
+- Standoffs / mounting hardware
+- Enclosure or frame
 
-AliExpress links you provided:
-- https://www.aliexpress.com/item/1005010227131923.html
-- https://www.aliexpress.com/item/1005007319706057.html
-- https://www.aliexpress.com/item/1005006155582430.html
+No external microphone needed — the dev kit has one built in.
 
 ---
 
 ## Tools
 
-- Soldering iron (optional but recommended if you’re making permanent wiring)
-- Small screwdrivers (for terminal blocks)
-- USB cable for ESP32-S3
-- Home Assistant with ESPHome add-on **or** ESPHome CLI on a computer
+- USB-C cable (for programming and power during development)
+- Small screwdrivers (for terminal blocks, if used)
+- Soldering iron (optional — only if making permanent connections)
+- A computer with **ESP-IDF v5.3+** installed
 
 ---
 
-## Power (read this)
+## Power (read this first)
 
-RGB matrix panels can draw **a lot of current** depending on brightness and content.
-- Use a **real 5V supply** with enough current capacity for your panel.
-- **Do not** power the HUB75 panel from the ESP32 3.3V regulator.
-- Always connect **panel GND** to **ESP32 GND** (common ground).
+Two RGB matrix panels can draw **significant current** at full brightness.
 
-Start safe:
-- Keep `brightness` conservative while testing.
-- Use thicker wires for panel power (5V/GND).
-- If you see flicker/reset when bars get bright, your supply/wiring is likely undersized.
-
----
-
-## Step 1 — Wire the INMP441 (audio input)
-
-Known-good wiring (as used in the config):
-
-- INMP441 VDD/3V3 → ESP32 3.3V
-- INMP441 GND → ESP32 GND
-- INMP441 SCK/BCLK → GPIO41
-- INMP441 WS/LRCLK → GPIO42
-- INMP441 SD/DOUT → GPIO40
-- INMP441 L/R → GND (forces left channel; matches config)
-
-See diagram: `docs/diagrams/inmp441_wiring.png`
+- Use a **real 5 V supply** rated for at least 8 A.
+- **Do not** power the panels from the ESP32-P4 board's USB supply.
+- **Common ground required:** Panel GND, ESP32-P4 GND, and PSU GND all tied together.
+- Use thicker wires (18–20 AWG) for the 5 V / GND panel power runs.
+- Start with low brightness while testing — if bars flicker when bright,
+  your supply or wiring is undersized.
 
 ---
 
-## Step 2 — Wire the HUB75 panel (display output)
+## Step 1 — Wire the HUB75 panels
 
-The ESPHome YAML contains the definitive pin mapping:
+Connect the **first panel's input** to the ESP32-P4 GPIOs as listed in
+[WIRING.md](WIRING.md).
 
-- R1→GPIO4  G1→GPIO5  B1→GPIO6
-- R2→GPIO7  G2→GPIO8  B2→GPIO9
-- A→GPIO10  B→GPIO11  C→GPIO12  D→GPIO13  E→GPIO14
-- CLK→GPIO15  LAT→GPIO16  OE→GPIO17
+Then connect the **first panel's HUB75 output** to the **second panel's
+HUB75 input** using a 16-pin ribbon cable. That's the daisy-chain — the
+shift driver clocks data through both panels automatically.
 
-Panel configuration:
-- `panel_width: 128`
-- `panel_height: 64`
-- `shift_driver: FM6126A` (important for many newer panels)
+Both panels share 5 V power and GND from your supply.
 
-See diagram: `docs/diagrams/hub75_wiring.png`
+The microphone is onboard — no mic wiring needed.
 
 ---
 
-## Step 3 — Install ESPHome firmware
+## Step 2 — Install ESP-IDF
 
-### Option A (Home Assistant + ESPHome add-on)
-1. Copy `esphome/spectrum-analyzer.yaml` and `esphome/spectrum_includes.h` into your ESPHome folder
-2. Create `esphome/secrets.yaml` from `secrets.example.yaml`
-3. In ESPHome, click **+ NEW DEVICE** (or **Import**)
-4. Compile and flash via USB for first install (recommended)
-5. After the first flash, OTA will work (using your OTA password)
+Follow [Espressif's getting-started guide](https://docs.espressif.com/projects/esp-idf/en/stable/esp32p4/get-started/index.html)
+for ESP-IDF v5.3+ with ESP32-P4 support.
 
-### Option B (ESPHome CLI)
-1. Install ESPHome
-2. Place the YAML + header in a working directory
-3. Add `secrets.yaml`
-4. Run:
-   - `esphome run spectrum-analyzer.yaml`
+Verify the install:
+
+```bash
+idf.py --version
+```
 
 ---
 
-## Step 4 — Verify it’s working
+## Step 3 — Build and flash
 
-Expected behavior:
-- On boot, you should see a **startup animation** (full-screen bar test)
-- Once Home Assistant connects via API, the animation stops and FFT rendering begins
-- A tiny status pixel indicates:
-  - **Red**: waiting / not connected
-  - **Green**: connected
+```bash
+cd spectrum-plus/firmware
+idf.py set-target esp32p4
+idf.py build
+idf.py -p /dev/ttyUSB0 flash monitor
+```
 
-If you see only the boot animation:
-- Check Wi‑Fi + API encryption key
-- Confirm Home Assistant can reach the device
+Replace `/dev/ttyUSB0` with your serial port (`COMx` on Windows).
 
-If you see “nothing” or random flicker:
-- Check HUB75 wiring + panel power
-- Confirm your panel is compatible with `FM6126A`
-- Reduce brightness while debugging power issues
+The component manager will automatically fetch `esp-dsp` and the HUB75 DMA
+library on the first build.
+
+---
+
+## Step 4 — Verify
+
+Expected behavior after flashing:
+
+1. **Boot animation** runs for 6 seconds (sine-wave pattern, 128 bars, red status pixel)
+2. **Spectrum analyzer** starts (status pixel turns green)
+3. Bars respond to sound picked up by the onboard microphone
+
+If the screen is blank or flickering:
+- Check HUB75 wiring and panel power
+- Confirm your panels use the FM6126A shift driver
+- Reduce brightness in `main.cpp` (`dma_display->setBrightness8(...)`)
+
+If bars never appear after boot animation:
+- Check serial monitor for I2S or ES8311 init errors
+- Verify the I2C / I2S GPIOs match `pin_config.h`
 
 ---
 
 ## Step 5 — Enclosure / mounting (optional)
 
-Common approaches:
-- Mount ESP32 + HUB75 adapter on a small plate behind the panel
-- Keep the microphone away from the panel power wiring if possible
-- Add a simple stand or frame so the panel can sit at a nice viewing angle
+- Mount the ESP32-P4 board behind or beside the panels
+- The onboard mic works best when not blocked by the enclosure — leave a small
+  opening or mount it near the edge
+- Add a stand or frame for a good viewing angle
 
 ---
 
-## Next steps / customization
+## Next steps
 
-Safe customizations (don’t change DSP unless you mean to):
-- Brightness
-- Color palette in the display lambda
-- Bar spacing / bar width
-- Startup animation duration
-
-For DSP/AGC tuning, see `docs/TUNING.md`.
+- **Tuning:** See [TUNING.md](TUNING.md) for DSP parameter adjustments.
+- **Pin changes:** Edit `firmware/main/pin_config.h` if your wiring differs.
+- **Brightness:** Adjust `dma_display->setBrightness8(96)` in `main.cpp`.
