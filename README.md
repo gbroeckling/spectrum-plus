@@ -81,6 +81,10 @@ See [hardware/BOM.md](hardware/BOM.md) for the full parts list and
 
 ## Quick start
 
+> **Coming from ESPHome?** See [docs/DEV_SETUP.md](docs/DEV_SETUP.md) for
+> a full walkthrough using **VS Code** (build button, flash button, serial
+> monitor — closest experience to the ESPHome dashboard).
+
 ### 1. Install ESP-IDF
 
 Follow [Espressif's official guide](https://docs.espressif.com/projects/esp-idf/en/stable/esp32p4/get-started/index.html)
@@ -138,6 +142,7 @@ spectrum-plus/
 │   └── BOM.md                  Bill of materials
 ├── docs/
 │   ├── BUILD.md                Build & flash guide
+│   ├── DEV_SETUP.md            VS Code + ESP-IDF setup (for ESPHome users)
 │   ├── WIRING.md               Pin map & daisy-chain instructions
 │   ├── TUNING.md               DSP parameter reference
 │   └── FAQ.md                  Troubleshooting
