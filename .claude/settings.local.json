@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(gh auth:*)",
+      "Bash(git clone:*)",
+      "Bash(find /c/Users/Garry/spectrum-plus/temp-clone -type d ! -path */.git/*)",
+      "Bash(cp -r /c/Users/Garry/spectrum-plus/temp-clone/* /c/Users/Garry/spectrum-plus/)",
+      "Bash(cp /c/Users/Garry/spectrum-plus/temp-clone/.gitignore /c/Users/Garry/spectrum-plus/)",
+      "Bash(git init:*)",
+      "Bash(git add:*)",
+      "Bash(git commit -m \"Initial commit: import Spectrum analyzer project as base for Spectrum Plus:*)"
+    ]
+  }
+}
